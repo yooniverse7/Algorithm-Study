@@ -4,28 +4,23 @@ public class Solution {
     public int[] solution(int []arr) {
         
         Stack<Integer> stack = new Stack<>();
-        int N = arr.length;
-
-        for (int i = 0; i < N; i++) {
-            if(stack.isEmpty()) {
-                stack.push(arr[i]);
+        stack.push(arr[0]);
+        
+        for(int i = 1; i<arr.length; i++) {
+            int num = stack.pop();
+            if(num == arr[i]) {
+                stack.push(num);
             } else {
-                int num = stack.pop();
-                if(num == arr[i]) { // 같다면
-                    stack.push(num);
-                } else { // 다르다면
-                    stack.push(num);
-                    stack.push(arr[i]);
-                }
+                stack.push(num);
+                stack.push(arr[i]);
             }
         }
-
-        int num = stack.size();
-        int[] answer = new int[num];
-       
-        for (int i = 0; i < num; i++) {
+        
+        int[] answer = new int[stack.size()];
+        for(int i = 0; i<stack.size(); i++) {
             answer[i] = stack.get(i);
         }
+        
 
         return answer;
     }
